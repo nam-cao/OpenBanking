@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: Product Services v2
+  version: '1.0'
+  description: 'Get product details including fees, interest rates, features and descriptions  '
+  contact:
+    name: Nam Cao
+    email: nam_cao_221@hotmail.com
+servers:
+  - url: 'https://api.anz/cds-au/v1'
+    description: prod
+paths:
+  '/products/{productId}':
+    parameters:
+      - schema:
+          type: string
+        name: productId
+        in: path
+        description: "**productId**. Unique identifier for the product. Please note multiple productIds can be entered using comma ',' as separators."
+        example: e9a3b4fe-240c-388e-2282-42db8f570e63
+        required: true
+    get:
+      summary: '/products/{productId}'
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+              examples:
+                Example Response:
+                  value:
+                    data:
+                      depositRates:
+                        - rate: '0.0001'
+                          applicationFrequency: P1M
+                          depositRateType: VARIABLE
+                          calculationFrequency: P1D
+                        - rate: '0.0099'
+                          applicationFrequency: P1M
+                          additionalInfo: 'Bonus interest is subject to eligibility. ANZ Progress Saver pays bonus interest (in addition to the current variable base interest) in respect of a particular month if the set minimum deposit (currently $10) and no withdrawals, fees or charges are processed to the account on or before the last business day of that calendar month, and after the last business day of the previous calendar month. Bonus and base rates are variable and subject to change.'
+                          additionalValue: When you make a single deposit of $10 or more in a month and no withdrawals
+                          depositRateType: BONUS
+                          calculationFrequency: P1D
+                      lastUpdated: '2020-04-09T05:10:02.849734Z'
+                      additionalInformation:
+                        eligibilityUri: 'https://www.anz.com.au/personal/bank-accounts/savings-accounts/progress-saver/?CID=af:obank:sv'
+                        feesAndPricingUri: 'https://www.anz.com.au/personal/bank-accounts/savings-accounts/progress-saver/?CID=af:obank:sv'
+                        termsUri: 'http://www.anz.com/auxiliary/rates-fees-terms/fees-terms-conditions/?CID=af:obank:sv#FTPDS'
+                        overviewUri: 'https://www.anz.com.au/personal/bank-accounts/savings-accounts/progress-saver/?CID=af:obank:sv'
+                      fees:
+                        - amount: '2.50'
+                          additionalInfoUri: 'https://www.anz.com.au/content/dam/anzcomau/documents/pdf/personal-account-fees-charges.pdf?CID=af:obank:sv'
+                          name: Staff Assisted Transaction
+                          currency: AUD
+                          feeType: TRANSACTION
+                        - amount: '1.00'
+                          additionalInfoUri: 'https://www.anz.com.au/content/dam/anzcomau/documents/pdf/personal-account-fees-charges.pdf?CID=af:obank:sv'
+                          name: Electronic Transaction
+                          currency: AUD
+                          feeType: TRANSACTION
+                      isTailored: false
+                      productId: e9a3b4fe-240c-388e-2282-42db8f570e63
+                      name: ANZ Progress Saver
+                      description: Savings account where can earn bonus interest for saving regularly
+                      applicationUri: 'https://applyonline.anz.com/dsr-dep/deposits/apply?apptype=PS&sourcecode_1=OCC&CID=af:obank:sv'
+                      effectiveFrom: '2020-04-13T22:00:00Z'
+                      brand: ANZ
+                      productCategory: TRANS_AND_SAVINGS_ACCOUNTS
+                    meta: {}
+                    links:
+                      self: 'https://api.anz/cds-au/v1/banking/products/e9a3b4fe-240c-388e-2282-42db8f570e63'
+      operationId: get-products-productId
+      description: "Obtain product details such as fees, interest rates and product features based on unique `productId`. To obtain several product details, multiple `productId`s can be entered using comma ',' as separators. <br /> *Example: 3776f456-9612-1354-70db-a165f84ef653,e9a3b4fe-240c-388e-2282-42db8f570e63*"
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: x-v
+          description: ''
+          enum:
+            - 1
+          required: true
+components:
+  schemas: {}
+  securitySchemes:
+    API Key - 1:
+      name: API Key
+      type: apiKey
+      in: query
