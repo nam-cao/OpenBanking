@@ -21,7 +21,8 @@ paths:
         required: true
     get:
       summary: '/products/{productId}'
-      tags: []
+      tags:
+        - Product Endpoints
       responses:
         '200':
           description: OK
