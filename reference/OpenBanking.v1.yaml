@@ -67,8 +67,16 @@ paths:
                         productSubCode:
                           type: string
                         eligibility:
-                          type:
-                            - string
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              eligibilityType:
+                                type: string
+                              additionalInfo:
+                                type: string
+                              additionalValue:
+                                type: string
                         depositRates:
                           type: array
                           items:
@@ -142,15 +150,16 @@ paths:
                                       type: string
                                     depositRateType:
                                       type: string
+
                       required:
                         - productName
                         - productCode
                         - productSubCode
-                        - eligibility
                         - depositRates
                         - fees
                         - declaration
                         - balanceTiers
+                        - eligibility
                 required:
                   - products
               examples:
